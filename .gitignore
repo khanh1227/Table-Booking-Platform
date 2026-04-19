@@ -1,0 +1,88 @@
+# Python rác
+**/__pycache__/
+*.py[cod]
+*$py.class
+be/.venv/
+
+# Node rác
+node_modules/
+fe/node_modules/
+mobile_app/node_modules/
+
+# Thư mục build
+dist/
+build/
+fe/dist/
+
+# Logs
+*.log
+be/server.log
+be/server_err.log
+
+# Temp / runtime
+be/tmp/
+tmp/
+*.tmp
+
+# Token / secret
+be/tmp_token.txt
+
+# Media (file upload runtime)
+be/media/
+
+
+# =========================
+# IDE / OS
+# =========================
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# =========================
+# DATABASE
+# =========================
+*.sqlite3
+
+
+
+# =========================
+# FILE KHÔNG PHẢI CODE
+# =========================
+*.docx
+*.pdf
+*.md
+*.ipynb
+
+be/*.txt
+be/*.md
+
+
+# =========================
+# TEST FILES (Python)
+# =========================
+test_*.py
+be/test_*.py
+seed_*.py
+be/seed_*.py
+
+# Thư mục test
+tests/
+be/tests/
+
+
+
+# =========================
+# TEST REPORT / OUTPUT
+# =========================
+*test*.log
+*test*.txt
+*test*.md
+
+
+
+
+
+
+# PhoBERT model files
+be/chatbot/phobert/
