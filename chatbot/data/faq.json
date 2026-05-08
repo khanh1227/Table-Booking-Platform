@@ -1,0 +1,57 @@
+[
+  {
+    "question": "Làm thế nào để đặt bàn qua chatbot?",
+    "answer": "Rất đơn giản! Bạn chỉ cần cho mình biết: (1) Tên nhà hàng hoặc loại ẩm thực muốn ăn, (2) Ngày và giờ dự kiến, (3) Số lượng người. Mình sẽ kiểm tra chỗ trống và hỗ trợ bạn đặt bàn ngay.",
+    "tags": ["đặt bàn", "hướng dẫn", "booking"]
+  },
+  {
+    "question": "Có thể đặt bàn cho nhóm đông người không?",
+    "answer": "Hệ thống hỗ trợ đặt bàn trực tuyến tối đa 20 người. Nếu nhóm của bạn đông hơn, vui lòng liên hệ trực tiếp với hotline của nhà hàng để được hỗ trợ đặt bàn đặc biệt hoặc phòng riêng.",
+    "tags": ["nhóm lớn", "số lượng người", "đặt bàn"]
+  },
+  {
+    "question": "Chính sách hủy hoặc thay đổi đặt bàn như thế nào?",
+    "answer": "Bạn có thể xem và quản lý đặt bàn trong mục 'Lịch sử đặt bàn'. Để hủy hoặc thay đổi, hãy liên hệ trực tiếp với nhà hàng qua số điện thoại được cung cấp trên trang chi tiết nhà hàng. Nên hủy trước ít nhất 2 giờ để tránh phí.",
+    "tags": ["hủy đặt bàn", "thay đổi", "chính sách"]
+  },
+  {
+    "question": "Chatbot có thể giúp tìm nhà hàng theo không gian và cảm xúc không?",
+    "answer": "Có! Bạn có thể mô tả không gian bạn muốn, ví dụ: 'quán lãng mạn cho hẹn hò', 'quán yên tĩnh để làm việc', 'phù hợp cho gia đình có trẻ em', 'quán có view đẹp'. Mình sẽ gợi ý nhà hàng phù hợp nhất.",
+    "tags": ["tìm kiếm", "không gian", "lãng mạn", "hẹn hò", "gia đình"]
+  },
+  {
+    "question": "Có thể xem thực đơn trước khi đặt bàn không?",
+    "answer": "Có! Bạn hỏi mình về thực đơn của nhà hàng cụ thể, hoặc tìm kiếm theo tên món ăn. Ví dụ: 'Cho xem thực đơn của El Gaucho' hoặc 'Tìm nhà hàng có món bún bò Huế'. Mình sẽ hiển thị các món ăn kèm giá.",
+    "tags": ["thực đơn", "menu", "món ăn"]
+  },
+  {
+    "question": "Hệ thống đặt bàn có bảo mật thông tin không?",
+    "answer": "Có. Mọi thông tin đặt bàn của bạn được bảo mật theo chính sách riêng tư của hệ thống. Bạn cần đăng nhập để đặt bàn và quản lý lịch sử đặt bàn cá nhân.",
+    "tags": ["bảo mật", "thông tin cá nhân", "đăng nhập"]
+  },
+  {
+    "question": "Làm sao tìm nhà hàng theo khu vực hoặc quận?",
+    "answer": "Bạn chỉ cần nói 'Tìm nhà hàng ở Quận 1', 'Quán ngon ở Thủ Đức', hoặc 'Nhà hàng Hàn Quốc gần Bình Thạnh'. Mình sẽ tìm và gợi ý các nhà hàng trong khu vực đó.",
+    "tags": ["khu vực", "quận", "địa điểm", "vị trí"]
+  },
+  {
+    "question": "Có thể đặt bàn vào ngày lễ hoặc cuối tuần không?",
+    "answer": "Có thể! Tuy nhiên các khung giờ vào cuối tuần và ngày lễ thường được đặt trước rất sớm. Mình khuyên bạn nên đặt bàn trước ít nhất 1-2 ngày để đảm bảo có chỗ. Dùng lệnh 'Kiểm tra khung giờ trống' để xem nhà hàng còn chỗ không.",
+    "tags": ["cuối tuần", "ngày lễ", "đặt trước", "khung giờ"]
+  },
+  {
+    "question": "Chatbot có thể gợi ý nhà hàng theo ngân sách không?",
+    "answer": "Có! Bạn có thể nói 'Tìm nhà hàng giá rẻ dưới 150k', 'Quán buffet tầm trung', hoặc 'Nhà hàng cao cấp cho dịp đặc biệt'. Mình có thể sắp xếp theo giá từ thấp đến cao hoặc ngược lại.",
+    "tags": ["ngân sách", "giá rẻ", "tầm trung", "cao cấp", "chi phí"]
+  },
+  {
+    "question": "Có thể yêu cầu bàn đặc biệt hoặc trang trí không?",
+    "answer": "Khi đặt bàn, bạn có thể điền yêu cầu đặc biệt vào ô 'Ghi chú' trong form đặt bàn. Ví dụ: 'Bàn gần cửa sổ', 'Trang trí sinh nhật', 'Ghế trẻ em', 'Phòng riêng'. Nhà hàng sẽ cố gắng đáp ứng tùy theo khả năng.",
+    "tags": ["yêu cầu đặc biệt", "bàn đặc biệt", "trang trí", "sinh nhật"]
+  },
+  {
+    "question": "Làm sao để biết nhà hàng nào ngon và uy tín?",
+    "answer": "Mỗi nhà hàng trên hệ thống đều có điểm đánh giá (rating) từ khách hàng thực tế. Bạn có thể yêu cầu 'Tìm quán được đánh giá cao nhất' hoặc lọc theo loại ẩm thực và sắp xếp theo sao. Tất cả nhà hàng đều đã được kiểm duyệt trước khi đăng.",
+    "tags": ["đánh giá", "rating", "uy tín", "chất lượng"]
+  }
+]

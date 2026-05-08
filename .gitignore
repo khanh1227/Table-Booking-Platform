@@ -1,0 +1,81 @@
+# [Root .gitignore for Restaurant Booking Platform]
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment Variables (IMPORTANT: Never push secrets)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.jks
+*.p8
+*.p12
+*.mobileprovision
+
+# Python (Backend & Chatbot)
+**/__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+build/
+dist/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Django Specific
+be/db.sqlite3
+be/media/
+be/staticfiles/
+media/
+staticfiles/
+
+# Node / JS (Frontend & Mobile)
+node_modules/
+fe/dist/
+fe/dist-ssr/
+fe/build/
+mobile/dist/
+mobile/web-build/
+.expo/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.metro-health-check*
+expo-env.d.ts
+*.tsbuildinfo
+
+# Native (Mobile)
+mobile/
+mobile/ios/
+mobile/android/
+.kotlin/
+
+# Databases & Vector Stores
+chroma_db/
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# Database dumps (Optional: uncomment if you don't want to push SQL dumps)
+# *.sql
