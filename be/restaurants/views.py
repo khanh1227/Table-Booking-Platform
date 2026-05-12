@@ -132,6 +132,7 @@ class RestaurantViewSet(viewsets.ModelViewSet):
         # Detail view cần thêm menu_items + time_slots; list/search chỉ cần images
         if self.action in ('retrieve',):
             queryset = queryset.prefetch_related('menu_items', 'time_slots')
+        
         user = self.request.user
 
         # Chưa đăng nhập -> chỉ APPROVED

@@ -64,7 +64,6 @@ expo-env.d.ts
 *.tsbuildinfo
 
 # Native (Mobile)
-mobile/
 mobile/ios/
 mobile/android/
 .kotlin/

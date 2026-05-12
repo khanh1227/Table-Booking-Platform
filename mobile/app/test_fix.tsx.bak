@@ -1,0 +1,197 @@
+import React, { useState, useEffect } from 'react';
+import { 
+  View, 
+  Text, 
+  TextInput, 
+  TouchableOpacity, 
+  FlatList, 
+  ActivityIndicator,
+  SafeAreaView,
+  ScrollView,
+  Alert
+} from 'react-native';
+import * as Location from 'expo-location';
+import { Search, X, Navigation, Star, Clock } from 'lucide-react-native';
+import { useLocalSearchParams } from 'expo-router';
+import MainHeader from '../../src/components/MainHeader';
+import { smartSearch, fetchRestaurants } from '../../src/services/api';
+import RestaurantCard from '../../src/components/RestaurantCard';
+
+export default function TestFixScreen() {
+  console.log("METRO_CHECK_TEST_FIX_SCREEN");
+  const { search } = useLocalSearchParams();
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [activeCuisine, setActiveCuisine] = useState((search as string) || 'Tất cả');
+  const [sortBy, setSortBy] = useState('-rating'); // Default sort
+  const [detectingLocation, setDetectingLocation] = useState(false);
+
+  const cuisines = ['Tất cả', 'Món Việt', 'Món Nhật', 'Hải Sản', 'BBQ', 'Buffet', 'Chay'];
+
+  useEffect(() => {
+    if (search) setActiveCuisine(search as string);
+  }, [search]);
+
+  useEffect(() => {
+    loadInitialData();
+  }, [sortBy, activeCuisine]);
+
+  useEffect(() => {
+    if (query.length > 2) {
+      const timer = setTimeout(handleSmartSearch, 500);
+      return () => clearTimeout(timer);
+    } else if (query.length === 0) {
+      loadInitialData();
+    }
+  }, [query]);
+
+  const loadInitialData = async () => {
+    setLoading(true);
+    try {
+      const data = await fetchRestaurants(activeCuisine === 'Tất cả' ? undefined : activeCuisine, sortBy);
+      setResults(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSmartSearch = async () => {
+    if (!query) return;
+    setLoading(true);
+    try {
+      const data = await smartSearch(query);
+      setResults(data);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleNearMe = async () => {
+    try {
+      setDetectingLocation(true);
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== 'granted') {
+        Alert.alert('Thông báo', 'Bạn cần cho phép quyền truy cập vị trí để sử dụng tính năng này');
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      const { latitude, longitude } = location.coords;
+
+      const res = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}&zoom=10&addressdetails=1`,
+        { headers: { 'Accept-Language': 'vi', 'User-Agent': 'RestaurantBookingApp/1.0' } }
+      );
+      const data = await res.json();
+      
+      const city = data.address.state || data.address.province || "";
+      const district = data.address.city || data.address.town || data.address.district || "";
+
+      if (city) {
+        setQuery(city);
+        Alert.alert('Thành công', `Đã tìm thấy vị trí của bạn tại ${district}, ${city}`);
+      }
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Lỗi', 'Không thể lấy vị trí hiện tại');
+    } finally {
+      setDetectingLocation(false);
+    }
+  };
+
+  const renderHeader = () => (
+    <View className="px-4 pt-1 pb-2">
+      <View className="flex-row items-center bg-white border border-gray-100 rounded-2xl px-4 py-3 shadow-sm mb-6 mt-4">
+        <Search size={20} color="#9ca3af" />
+        <TextInput
+          placeholder="Tìm nhà hàng, món ăn..."
+          className="flex-1 ml-2 text-gray-700 font-medium"
+          value={query}
+          onChangeText={setQuery}
+          onSubmitEditing={handleSmartSearch}
+        />
+        {query.length > 0 ? (
+          <TouchableOpacity onPress={() => setQuery('')}>
+            <X size={18} color="#9ca3af" />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity 
+            onPress={handleNearMe}
+            disabled={detectingLocation}
+          >
+            {detectingLocation ? (
+              <ActivityIndicator size="small" color="#ef4444" />
+            ) : (
+              <Navigation size={20} color="#ef4444" />
+            )}
+          </TouchableOpacity>
+        )}
+      </View>
+
+      <View className="flex-row mb-6">
+        <TouchableOpacity 
+          onPress={() => setSortBy('-rating')}
+          className={`flex-row items-center mr-6 ${sortBy === '-rating' ? 'opacity-100' : 'opacity-40'}`}
+        >
+          <Star size={16} color={sortBy === '-rating' ? "#f97316" : "#6b7280"} fill={sortBy === '-rating' ? "#f97316" : "transparent"} />
+          <Text className={`ml-1.5 text-xs font-bold ${sortBy === '-rating' ? 'text-gray-900' : 'text-gray-500'}`}>Đánh giá cao</Text>
+        </TouchableOpacity>
+        <TouchableOpacity 
+          onPress={() => setSortBy('-created_at')}
+          className={`flex-row items-center ${sortBy === '-created_at' ? 'opacity-100' : 'opacity-40'}`}
+        >
+          <Clock size={16} color="#6b7280" />
+          <Text className={`ml-1.5 text-xs font-bold ${sortBy === '-created_at' ? 'text-gray-900' : 'text-gray-500'}`}>Mới nhất</Text>
+        </TouchableOpacity>
+      </View>
+
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mb-6">
+        {cuisines.map((item) => (
+          <TouchableOpacity 
+            key={item}
+            onPress={() => setActiveCuisine(item)}
+            className={`px-6 py-2.5 rounded-full mr-3 border ${activeCuisine === item ? 'bg-red-600 border-red-600 shadow-lg shadow-red-200' : 'bg-white border-gray-100 shadow-sm'}`}
+          >
+            <Text className={`text-xs font-black ${activeCuisine === item ? 'text-white' : 'text-gray-600'}`}>
+              {item}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </View>
+  );
+
+  return (
+    <SafeAreaView className="flex-1 bg-white">
+      <MainHeader title="Kiểm tra Fix" />
+      <FlatList
+        data={results}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <View className="px-4 mb-4">
+            <RestaurantCard restaurant={item} />
+          </View>
+        )}
+        ListHeaderComponent={renderHeader}
+        ListEmptyComponent={
+          loading ? (
+            <ActivityIndicator size="large" color="#ef4444" className="mt-20" />
+          ) : (
+            <View className="items-center mt-20">
+              <Search size={48} color="#d1d5db" />
+              <Text className="text-gray-400 mt-4 font-medium">Không tìm thấy kết quả nào</Text>
+            </View>
+          )
+        }
+        contentContainerStyle={{ paddingBottom: 20 }}
+        onRefresh={loadInitialData}
+        refreshing={loading}
+      />
+    </SafeAreaView>
+  );
+}
